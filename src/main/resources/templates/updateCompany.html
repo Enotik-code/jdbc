@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Изменить компанию</title>
+</head>
+<body>
+<form method="post" name="updateCompany">
+  <tr th:each="company : ${myCompany}">
+  <label>Город - </label> <label th:text="${company.getCity().getName()}"></label>
+  <select name="city">
+    <option th:each="city : ${cityList}"
+            th:text="${city.name}">
+    </option>
+  </select>
+    <br>
+  <label>Статус заказа - </label> <label th:text="${company.getStatus().getName()}"></label>
+  <select name="status">
+    <option th:each="status : ${statusList}"
+            th:text="${status.name}">
+    </option>
+  </select>
+    <br>
+  <label>Предмет заказа - </label> <label th:text="${company.getCargo().getName()}"></label>
+  <select name="cargo">
+    <option th:each="cargo : ${cargoList}"
+            th:text="${cargo.name}">
+    </option>
+  </select>
+    <br>
+  <input th:placeholder="${company.getName()}" th:text="${company.getName()}" type="text" name="name">
+  <button type="submit" >Сохранить</button>
+  </tr>
+</form>
+<br>
+<a href="/list">Список компаний</a>
+</body>
+</html>
