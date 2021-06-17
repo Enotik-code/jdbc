@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="by.jrr.jdbc.bean.Developer" table="HIBERNATE_DEVELOPERS">
+        <meta attribute="class-description">
+            This class contains developer's details.
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <set name="projects" cascade="all">
+            <key column="DEVELOPER_ID"/>
+            <one-to-many class="by.jrr.jdbc.Project"/>
+        </set>
+
+<!--
+        <list name="projects" cascade="all">
+            <key column="DEVELOPER_ID"/>
+            <list-index column="idx"/>
+            <one-to-many class="net.proselyte.hibernate.mappings.list.Project"/>
+        </list>
+-->
+
+<!--        <map name="projects" cascade="all">
+            <key column="DEVELOPER_ID"/>
+            <index column="SPHERE" type="string" />
+            <one-to-many class="net.proselyte.hibernate.mappings.map.Project"/>
+        </map>-->
+        <many-to-one name="company" column="COMPANY" not-null="true"
+                     class="net.proselyte.hibernate.association.manytoone.Company"/>
+
+
+        <property name="firstName" column="FIRST_NAME" type="string"/>
+        <property name="lastName" column="LAST_NAME" type="string"/>
+        <property name="getSpecialty" column="SPECIALTY" type="string"/>
+        <property name="experience" column="EXPERIENCE" type="int"/>
+    </class>
+
+
+
+</hibernate-mapping>
